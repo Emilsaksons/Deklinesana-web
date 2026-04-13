@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Picērija</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <style>
+        body { background-color: #fdfdfd; }
+        h1 { font-family: Erica One; font-size: 4rem }
+        @keyframes scroll { 0% { transform: translateX(100%); }  100% { transform: translateX(-100%); } }
+        .pizza-status-bar { background: #d32f2f; color: white; font-size: 0.85rem; padding: 5px; text-align: center; }
+        .scrolling-text {width: 100%; overflow: hidden; white-space: nowrap; box-sizing: border-box; animation: scroll 20s linear infinite;}
+        .nav-pills .nav-link.active { background-color: #388e3c; }
+        footer { margin-top: 50px; color: #888; text-align: center; }
+    </style>
+</head>
+</head>
+<body>
+    
+<div class="pizza-status-bar">
+        🟢 Serveris: tiešsaistē
+</div>
+<div class="scrolling-text">
+        Tu nemāki deklinēt vārdus, LOHS!!!!
+</div>
+
+    <div class = "pizza-status-bar">
+        <h1>Skolas picērija</h1>
+        <nav>
+            <a href="/">Sākums</a> | 
+            <a href="/locijumi">Locijumi</a> |
+            <a href="/deklinesana">Deklinēt vārdu</a> |
+            <a href="/info">Info</a> |
+        </nav>
+
+        <hr>
+        {% block content %}
+        {% endblock %}
+        <hr>
+        <footer>2026. gads | Skolas picērija</footer>
+    </div>
+
+
+</body>
+</html>
