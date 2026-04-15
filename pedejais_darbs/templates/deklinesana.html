@@ -1,8 +1,26 @@
 {% extends "fons.html" %}
 {% block content %}
-
-
-<h1>sveiki šeit deklinte</h1>
-
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow">
+            <div class="card-body">
+                <h1 class="text-center mb-4">Deklinēt vārdu</h1>
+                <form action="/deklinesana" method="POST">
+                    <div class="mb-3">
+                        <label for="word" class="form-label">Vārds</label>
+                        <input type="text" class="form-control" id="word" name="vards" required>
+                    </div>
+                    <div class="mb-3">
+                    	<input type="radio" id="vir" name="dzimte" value="Vīr. dz.">
+                        <label for="vir" class="form-label">Vīriešu dzimte</label><br>
+                        <input type="radio" id="siev" name="dzimte" value="Siev. dz.">
+                        <label for="siev" class="form-label">Sieviešu dzimte</label>  
+                    </div>
+                    <button type="submit" class="btn btn-danger w-100">Deklinēt</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
