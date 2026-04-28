@@ -33,7 +33,9 @@ def deklinet():
 			conn.close()
 			return render_template('deklinesana.html')
 
-		if vards.endswith('s') and dzimums == 'Siev. dz.':
+		if vards in ['Mēness', 'Akmens', 'Asmens', 'Rudens', 'Ūdens', 'Zibens', 'Suns', 'Sāls']:
+			deklinacija = '2*'
+		elif vards.endswith('s') and dzimums == 'Siev. dz.':
 			deklinacija = 6
 		elif vards.endswith('is'):
 			deklinacija = 2
@@ -74,12 +76,121 @@ def deklinet():
 	return render_template('deklinesana.html')
 
 
-@app.route('/results')
+@app.route('/results', methods=['GET', 'POST'])
 def results():
+	deklinacija=request.args.get('deklinacija')
+	vards=request.args.get('vards')
 	locijumi = []
-	if deklinacija==1:
+	if deklinacija == '1':
+		sakne = vards[:-1]
+		nominativs = vards
+		genetivs = sakne + 'a'
+		dativs = sakne + 'am'
+		akuzativs = sakne + 'u'
+		instrumentalis = 'ar ' + sakne + 'u'
+		lokativs = sakne + 'ā'
+		vokatīvs = sakne + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
+
+	elif deklinacija == '2':
+		sakne = vards[:-2]
+		nominativs = vards
+		if vards.endswith(('bis', 'mis', 'pis', 'vis')):
+			genetivs = sakne + 'ja'
+		elif vards.endswith(('tis', 'sis')):
+			sakne = vards[:-3]
+			genetivs = sakne + 'ša'
+		elif vards.endswith(('dis', 'zis')):
+			sakne = vards[:-3]
+			genetivs = sakne + 'ža'
+		elif vards.endswith('cis'):
+			sakne = vards[:-3]
+			genetivs = sakne + 'ča'
+		elif vards.endswith('nis'):
+			sakne = vards[:-3]
+			genetivs = sakne + 'ņa'
+		elif vards.endswith('lis'):
+			sakne = vards[:-3]
+			genetivs = sakne + 'ļa'
+		elif vards.endswith('snis'):
+			sakne = vards[:-4]
+			genetivs = sakne + 'šņa'
+		elif vards.endswith('znis'):
+			sakne = vards[:-4]
+			genetivs = sakne + 'žņa'
+		elif vards.endswith('slis'):
+			sakne = vards[:-4]
+			genetivs = sakne + 'šļa'
+		elif vards.endswith('zlis'):
+			sakne = vards[:-4]
+			genetivs = sakne + 'žļa'
+		elif vards.endswith('lnis'):
+			sakne = vards[:-3]
+			genetivs = sakne + 'ļņa'
+		dativs = sakne + 'im'
+		akuzativs = sakne + 'i'
+		instrumentalis = 'ar ' + sakne + 'i'
+		lokativs = sakne + 'ī'
+		vokatīvs = vards[:-1] + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
+
+
+	elif deklinacija == '2*':
+		sakne = vards[:-1]
+		nominativs = vards
+		genetivs = vards
+		dativs = sakne + 'im'
+		akuzativs = sakne + 'i'
+		instrumentalis = 'ar ' + sakne + 'i'
+		lokativs = sakne + 'ī'
+		vokatīvs = vards + 'i' + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
+
+	elif deklinacija == '3':
+		sakne = vards[:-2]
+		nominativs = vards
+		genetivs = vards
+		dativs = sakne + 'um'
+		akuzativs = sakne + 'u'
+		instrumentalis = 'ar ' + sakne + 'u'
+		lokativs = sakne + 'ū'
+		vokatīvs = vards + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
+
+	elif deklinacija == '4':
+		sakne = vards[:-1]
+		nominativs = vards
+		genetivs = sakne + 'as'
+		dativs = sakne + 'ai'
+		akuzativs = sakne + 'u'
+		instrumentalis = 'ar ' + sakne + 'u'
+		lokativs = sakne + 'ā'
+		vokatīvs = vards + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
+
+	elif deklinacija == '5':
+		sakne = vards[:-1]
+		nominativs = vards
+		genetivs = sakne + 'es'
+		dativs = sakne + 'ei'
+		akuzativs = sakne + 'i'
+		instrumentalis = 'ar ' + sakne + 'i'
+		lokativs = sakne + 'ē'
+		vokatīvs = vards + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
+
+	elif deklinacija == '6':
+		sakne = vards[:-1]
+		nominativs = vards
+		genetivs = vards
+		dativs = sakne + 'ij'
+		akuzativs = sakne + 'i'
+		instrumentalis = 'ar ' + sakne + 'i'
+		lokativs = sakne + 'ī'
+		vokatīvs = vards + '!'
+		locijumi.extend([nominativs,genetivs,dativs,akuzativs,instrumentalis,lokativs,vokatīvs])
 		
-	return render_template('results.html')
+	return render_template('results.html', locijumi=locijumi)
 
 
 @app.route('/info')
