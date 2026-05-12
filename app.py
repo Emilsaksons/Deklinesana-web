@@ -10,35 +10,35 @@ app.secret_key = 'slepena_atslega'
 def sakums():
 	return render_template('sakums.html')
 
-@app.context_processor
+@app.context_processor#Šeit scrollinf teksta teikumi
 def teicieni():
-    teksts = ["Deklinācija ir kā sports — ja netrenējies, formas nav 😄",
-    "Ja tu zini visus locījumus, tu esi boss līmenī latviešu valodā",
-    "Nominatīvs ir chill, bet ģenitīvs jau sāk prasīt domāt",
-    "Datīvs vienmēr kaut ko dod — kā labs draugs",
-    "Akuzatīvs? Tas vienkārši trāpa tieši mērķī 🎯",
-    "Instrumentālis vienmēr nāk ar 'ar' — bez viņa nekas nenotiek",
-    "Lokatīvs zina, kur viss notiek — īstais GPS",
-    "Vokatīvs ir tas, kur tu vienkārši sauc: 'HEI!' 😄",
-    "Ja vārds beidzas ar '-is', tad sākas piedzīvojums",
-    "Deklinācijas nav grūtas… līdz tu sāc tās mācīties",
-    "Latviešu valoda: kur viens vārds var kļūt par septiņiem",
-    "Ja tu saproti deklinācijas, tu saproti dzīvi (gandrīz)"]
-    rindina = random.choice(teksts)
-    return dict(rindina=rindina)
+	teksts = ["Deklinācija ir kā sports — ja netrenējies, formas nav 😄",
+	"Ja tu zini visus locījumus, tu esi boss līmenī latviešu valodā",
+	"Nominatīvs ir chill, bet ģenitīvs jau sāk prasīt domāt",
+	"Datīvs vienmēr kaut ko dod — kā labs draugs",
+	"Akuzatīvs? Tas vienkārši trāpa tieši mērķī 🎯",
+	"Instrumentālis vienmēr nāk ar 'ar' — bez viņa nekas nenotiek",
+	"Lokatīvs zina, kur viss notiek — īstais GPS",
+	"Vokatīvs ir tas, kur tu vienkārši sauc: 'HEI!' 😄",
+	"Ja vārds beidzas ar '-is', tad sākas piedzīvojums",
+	"Deklinācijas nav grūtas… līdz tu sāc tās mācīties",
+	"Latviešu valoda: kur viens vārds var kļūt par septiņiem",
+	"Ja tu saproti deklinācijas, tu saproti dzīvi (gandrīz)"]
+	rindina = random.choice(teksts)
+	return dict(rindina=rindina)
 
-@app.route('/locijumi')
+@app.route('/locijumi')#Šeit pāreja uz latviešu valodas tabulām
 def locijumi():
 	return render_template('locijumi.html')
 
-@app.route('/deklinesana', methods=['POST', 'GET'])
+@app.route('/deklinesana', methods=['POST', 'GET'])#Šeit pieslēkšanas db datubāzei un pāriešana uz vārdu deklinēšanas lapu un tad uz rezultātu lapu
 def deklinet():
 	conn = sqlite3.connect("vardi.db")
 	cur = conn.cursor()
 
 	if request.method == 'POST':
 		vards = request.form.get('vards').capitalize()
-		dzimums = request.form.get('dzimte')
+		dzimums = request.form.get('dzimte')      			
 
 		if not vards or not dzimums:
 			conn.close()
@@ -87,12 +87,20 @@ def deklinet():
 	return render_template('deklinesana.html')
 
 
-@app.route('/results', methods=['GET', 'POST'])
+@app.route('/results', methods=['GET', 'POST'])#Rezultātu lapa
 def results():
 	deklinacija=request.args.get('deklinacija')
 	vards=request.args.get('vards')
 	locijumi = []
-	if deklinacija == '1':
+	if deklinacija == '0':
+		nominativs = vards
+		genetivs = vards
+		dativs = vards
+		akuzativs = vards
+		instrumentalis = vards
+		lokativs = vards
+		vokatīvs = vards + '!'
+	elif deklinacija == '1':
 		sakne = vards[:-1]
 		nominativs = vards
 		genetivs = sakne + 'a'
@@ -198,19 +206,19 @@ def results():
 		vokatīvs = vards + '!'		
 
 	locijumi = [
-    	("Nominatīvs", nominativs),
-    	("Ģenitīvs", genetivs),
-    	("Datīvs", dativs),
-    	("Akuzatīvs", akuzativs),
-    	("Instrumentālis", instrumentalis),
-    	("Lokatīvs", lokativs),
-    	("Vokatīvs", vokatīvs)
+		("Nominatīvs", nominativs),
+		("Ģenitīvs", genetivs),
+		("Datīvs", dativs),
+		("Akuzatīvs", akuzativs),
+		("Instrumentālis", instrumentalis),
+		("Lokatīvs", lokativs),
+		("Vokatīvs", vokatīvs)
 				]
 		
 	return render_template('results.html', locijumi=locijumi)
 
 
-@app.route('/info')
+@app.route('/info')#Informācija par mājaslapu
 def info():
 	return render_template('info.html')
 

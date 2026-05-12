@@ -1,0 +1,65 @@
+:root{
+--fons: #216869;
+--burti: #DCFFFD;
+--scroll: #35012C;
+}
+.card-body,
+.card-body h1,
+.card-body p,
+.card-body li,
+.card-body td,
+.card-body th,
+.card-body label{
+    color: var(--fons) !important;
+    background-color: var(--burti) !important;
+    border-color: var(--burti) !important;
+    
+}
+
+h1, h2{
+	font-family: "Ubuntu";
+	font-size: 4rem;
+	color: var(--burti) !important;
+
+
+}
+p, li, td{
+	font-family: 'Instrument Sans';
+	color: var(--burti) !important;
+}
+th, label{
+	font-family: 'Instrument Sans';
+	font-weight: 700;
+	color: var(--burti) !important;
+}
+ul, ol{
+    text-align: center;
+    list-style-position: inside;
+}
+body{ 
+	background-color: var(--fons) !important 
+}
+a, footer{
+	color: var(--scroll) !important;
+}
+input, input[type="radio"]{
+	background-color: var(--fons) !important;
+	color: var(--burti) !important;
+	accent-color: var(--fons) !important;
+	border-color: var(--fons) !important;
+}
+button{
+	background-color: var(--scroll) !important;
+	border-color: var(--scroll) !important;
+	color: var(--burti) !important;
+}
+.mytable {
+    background-color: var(--scroll) !important;
+    color: var(--burti);
+    border-radius: 20px;
+    border-color: var(--fons) !important; 
+    text-align: center;
+
+    
+
+

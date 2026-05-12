@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:slnt,wght@-8,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@1,450&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deklinācijas pasaule</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <style>
+
+        @keyframes scroll { 0% { transform: translateX(100%); }  100% { transform: translateX(-100%); } }
+        .scrolling-text {font-family: 'Bitcount Grid Double'; overflow-x: hidden; animation: scroll 40s linear infinite; color: #35012C; width: 100%; font-size: 1.5rem;  display: flex}
+        .nav-pills .nav-link.active { background-color: #388e3c; }
+        footer { margin-top: 50px; color: #888; text-align: center; }
+    </style>
+</head>
+</head>
+<body>
+
+<div class="scrolling-text">
+    {{rindina}}
+
+
+
+
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <h1 class="text-center">Deklinotika</h1>
+        <nav class="text-center">
+            <a href="/">Sākums</a> | 
+            <a href="/locijumi">Locijumi</a> |
+            <a href="/deklinesana">Deklinēt vārdu</a> |
+            <a href="/info">Info</a> |
+        </nav>
+
+        <hr>
+        {% block content %}
+        {% endblock %}
+        <hr>
+        <footer>2026. gads | Deklinātors</footer>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,22 +1,24 @@
 {% extends "fons.html" %}
 {% block content %}
 
-<h2 class="mb-4">Locījumi</h2>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Locījums</th>
-            <th>Vārds</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for g in locijumi %}
-        <tr>
-            <td>{{ g[0] }}</td>
-            <td>{{ g[1] }}</td> 
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<h2 class="mb-4 text-center">Locījumi</h2>
+<div class="row justify-content-center mt-5">
+    <table class="mytable table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Locījums</th>
+                <th>Vārds</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for g in locijumi %}
+            <tr>
+                <td>{{ g[0] }}</td>
+                <td>{{ g[1] }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
